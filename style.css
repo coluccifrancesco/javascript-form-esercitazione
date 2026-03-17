@@ -4,36 +4,13 @@
     box-sizing: border-box;
 }
 
-.form-element {
-    padding: 20px;
-    box-shadow: 0 5px 5px rgba(0, 0, 0, 0.127);
-    border-radius: 20px;
-    margin: 5px 50px;
 
-    button{
-        background-color: rgb(128, 128, 255);
-        border: 0 solid transparent;
-        color: white;
-        padding: 10px 20px;
-        margin: 10px auto;
-        border-radius: 15px;
-    }
-}
-
-.input-container{
+.btn-input{
+    background-color: rgb(128, 128, 255);
+    border: 0 solid transparent;
+    color: white;
+    padding: 10px 20px;
     margin: 10px auto;
-}
-
-.tools-container {
-    padding: 20px;
-    box-shadow: 0 5px 5px rgba(0, 0, 0, 0.127);
-    border-radius: 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin: 5px 50px;
-
-    div{
-        margin: 15px 0;
-    }
+    border-radius: 15px;
+    cursor: pointer;
 }
