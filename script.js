@@ -1,8 +1,8 @@
-console.log("Here we are");
-
 const invitati = [];
+const form = document.getElementById("form-invitati")
 
 function aggiungiInvitato(){
+    
     e.preventDefault();
 
     let cognome = document.querySelector("#cognome").value.trim()
@@ -17,4 +17,12 @@ function aggiungiInvitato(){
     }
 
     invitati.push(invitato)
+    popolaLista()
+    form.reset()
+}
+
+form.addEventListener('submit', aggiungiInvitato)
+
+function popolaLista(){
+
 }
