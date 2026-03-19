@@ -21,7 +21,7 @@
             </div>
             
             <div class="mb-3">
-                <label for="cognome" class="form-label">Password</label>
+                <label for="cognome" class="form-label">Cognome</label>
                 <input type="text" class="form-control" id="cognome" name="cognome">
             </div>
             
@@ -30,30 +30,29 @@
                 <input type="email" class="form-control" id="email" name="email">
             </div>
             
-            <button type="submit" class="btn-input mb-0">Inserisci</button>
+            <button type="submit" class="btn-input my-1 mx-auto">Inserisci</button>
         </form>
 
         <div class="shadow rounded p-4 m-4">
-            <div class="d-flex justify-content-between align-content-center">
+            <div class="d-flex justify-content-between align-items-center">
                 <h2>Lista invitati</h2>
 
-                <div class="d-flex justify-content-between align-content-center">
-                    <button>Ordina</button>
-    
-                    <div>
-                        <label for="search" class="form-label">Ricerca</label>
-                        <input type="text" id="search" placeholder="Cerca utente" class="form-control">
-                    </div>
-    
-                    <div>
-                        <select name="" id="">
-                            <option value="tutti">Tutti</option>
-                            <option value="confermati">Confermati</option>
-                            <option value="nonconfermati">Non Confermati</option>
-                        </select>
-                    </div>
+                <div class="d-flex justify-content-between align-items-center gap-4">
+                    <input type="text" id="search" placeholder="Cerca utente" class="form-control" itemid="barraricerca">    
+                        
+                    <select name="" id="ordine-select" class="d-block">
+                        <option value="tutti">Tutti</option>
+                        <option value="confermati">Confermati</option>
+                        <option value="nonconfermati">Non Confermati</option>
+                    </select>
+                        
+                    <button class="w-100 btn-input" id="ordina">Ordina</button>
                 </div>
             </div>
+            
+            <ul id="lista-invitati" class="mt-5">
+
+            </ul>
         </div>
     </main>
 

@@ -4,13 +4,24 @@
     box-sizing: border-box;
 }
 
-
 .btn-input{
     background-color: rgb(128, 128, 255);
     border: 0 solid transparent;
     color: white;
     padding: 10px 20px;
-    margin: 10px auto;
-    border-radius: 15px;
+    border-radius: 10px;
     cursor: pointer;
+    transition: 0.2s ease-in-out;
+
+    &:hover{
+        background-color: rgb(97, 97, 193);
+    }
+}
+
+.confermato {
+    background-color: rgb(0, 232, 0);
+}
+
+.non-confermato {
+    background-color: #ffff00;
 }
