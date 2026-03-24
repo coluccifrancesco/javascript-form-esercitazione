@@ -1,4 +1,4 @@
-const invitati = [];
+let invitati = [];
 const form = document.getElementById("form-invitati");
 const btnOrdina = document.querySelector("#ordina");
 const cerca = document.getElementById("barraricerca");
@@ -41,7 +41,16 @@ function popolaLista() {
             if (select.value === "tutti" || select.value === "confermati" && inv.confermato || select.value === "non_confermati" && !inv.confermato) {
                 
                 const item = document.createElement(`li`);
-                item.innerHTML = `${inv.cognome} ${inv.nome}: ${inv.email} <input type="checkbox"> <button>X</button>`;
+                item.innerHTML = `
+                    <div class='d-flex justify-content-between align-items-center px-3'>
+                        <p class='mb-0'><b>${inv.cognome} ${inv.nome}</b> - ${inv.email}</p>
+                        
+                        <div>
+                            <input type="checkbox"> 
+                            <button class='btn btn-danger my-2'>X</button>
+                        </div>
+                    </div>    
+                `;
                 
                 const checkbox = item.querySelector(`input[type="checkbox"]`);  
                 const btn = item.querySelector('button')
@@ -67,6 +76,8 @@ function popolaLista() {
                         item.classList.add(`non-confermato`)
                         item.classList.remove(`confermato`)
                     }
+
+                    salvaListaInLocalStorage();
                 })
 
                 btn.addEventListener("click", (event) => {
@@ -79,7 +90,24 @@ function popolaLista() {
             }
         }
     })
+
+    salvaListaInLocalStorage();
 }
+
+function salvaListaInLocalStorage(){
+    localStorage.setItem('listaInvitati26', JSON.stringify(invitati));
+}
+
+window.addEventListener('load', () => {
+
+    // stored =  converto in json la stringa il cui contenuto è un vettore d'oggetti
+    const stored = JSON.parse(localStorage.getItem('listaInvitati26'));
+
+    if (stored) {
+        invitati = stored;
+        popolaLista();
+    }
+});
 
 form.addEventListener('submit', aggiungiInvitato);
 
