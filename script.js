@@ -1,7 +1,8 @@
 const invitati = [];
 const form = document.getElementById("form-invitati");
 const btnOrdina = document.querySelector("#ordina");
-const cerca = document.querySelector("#barraricerca");
+const cerca = document.getElementById("barraricerca");
+const select = document.querySelector("#ordine");
 
 function aggiungiInvitato(e) {
 
@@ -27,28 +28,24 @@ function popolaLista() {
 
     const listaInvitati = document.getElementById(`lista-invitati`)
 
+    // Ogni primo nodo della lista, finchè ne esiste uno,
+    // viene eliminato ad ogni invocazione per pulizia
     while (listaInvitati.firstChild) {
         listaInvitati.removeChild(listaInvitati.firstChild)
     }
 
     invitati.forEach((inv, pos) => {
-
-        const item = document.createElement(`li`);
-        item.innerHTML = `${inv.cognome} ${inv.nome}: ${inv.email} <input type="checkbox"> <button>X</button>`;
-
-        const btn = item.querySelector(`button`);
-        const checkbox = item.querySelector(`input[type="checkbox"]`);
-
-        const selectDotValue = document.querySelector("#ordine-select").value;
-
-        if (!cerca || `${inv.cognome} ${inv.nome} ${inv.email}`.contains(cerca)) {
-
-            if (
-                (selectDotValue === "tutti") ||
-                (selectDotValue === "confermati" && inv.confermato) ||
-                (selectDotValue === "nonconfermati" && !inv.confermato)
-            ) {
-
+        
+        if (!cerca || `${inv.cognome} ${inv.nome} ${inv.email}`.includes(cerca.value)) {
+            
+            if (select.value === "tutti" || select.value === "confermati" && inv.confermato || select.value === "non_confermati" && !inv.confermato) {
+                
+                const item = document.createElement(`li`);
+                item.innerHTML = `${inv.cognome} ${inv.nome}: ${inv.email} <input type="checkbox"> <button>X</button>`;
+                
+                const checkbox = item.querySelector(`input[type="checkbox"]`);  
+                const btn = item.querySelector('button')
+                
                 if (inv.confermato) {
                     checkbox.checked = true;
                     item.classList.add(`confermato`)
@@ -58,11 +55,6 @@ function popolaLista() {
                     item.classList.remove(`confermato`)
                     item.classList.add(`non-confermato`)
                 }
-
-                btn.addEventListener("click", (event) => {
-                    invitati.splice(pos, 1);
-                    popolaLista();
-                })
 
                 checkbox.addEventListener(`change`, (event) => {
 
@@ -77,22 +69,33 @@ function popolaLista() {
                     }
                 })
 
+                btn.addEventListener("click", (event) => {
+                    const index = invitati.indexOf(inv);
+                    invitati.splice(index, 1);
+                    popolaLista();
+                })
+
                 listaInvitati.appendChild(item);
             }
         }
     })
 }
 
+form.addEventListener('submit', aggiungiInvitato);
+
 btnOrdina.addEventListener('click', (event) => {
 
     invitati.sort((a, b) => {
+        
         if (a.cognome < b.cognome) {
             return -1;
         } else {
 
             if (a.cognome > b.cognome) {
                 return 1;
+            
             } else {
+                
                 if (a.nome < b.nome) {
                     return -1;
                 } else if (a.nome > b.nome) {
@@ -107,4 +110,5 @@ btnOrdina.addEventListener('click', (event) => {
     popolaLista();
 })
 
-form.addEventListener('submit', aggiungiInvitato);
+select.addEventListener('change',popolaLista);
+cerca.addEventListener('input',popolaLista);
